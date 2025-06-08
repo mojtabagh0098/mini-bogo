@@ -4,7 +4,6 @@ import {
   TextField,
   Button,
   Select,
-  Form,
   Banner,
   InlineGrid,
 } from "@shopify/polaris";
@@ -62,7 +61,7 @@ export default function BogoPage() {
     <Page title="BOGO Rules">
       {actionData?.success && <Banner status="success">Rule added successfully</Banner>}
       <Card>
-        <Form method="post">
+        <form method="post">
           <InlineGrid columns={2} gap="400">
             <TextField
               label="Trigger Product ID"
@@ -109,7 +108,7 @@ export default function BogoPage() {
           <Button submit variant="primary" fullWidth>
             Add Rule
           </Button>
-        </Form>
+        </form>
       </Card>
 
       {rules.map((rule: BogoRule) => (

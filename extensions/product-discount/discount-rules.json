@@ -1,0 +1,14 @@
+{
+  "rules": [
+    {
+      "id": "76d5cfc9-9914-4c6a-9864-3f257cd6c390",
+      "shop": "stomerrce.myshopify.com",
+      "triggerProductId": "10099548488016",
+      "rewardProductId": "10080151077200",
+      "requiredQty": 2,
+      "rewardQty": 1,
+      "discountType": "free",
+      "createdAt": "2025-06-08T16:32:24.288Z"
+    },
+  ]
+}

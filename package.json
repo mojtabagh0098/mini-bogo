@@ -2,7 +2,7 @@
   "name": "mini-bogo",
   "private": true,
   "scripts": {
-    "build": "npx prisma generate && remix vite:build",
+    "build": "npx prisma generate && remix vite:build && shopify app function build",
     "dev": "shopify app dev",
     "config:link": "shopify app config link",
     "generate": "shopify app generate",
@@ -50,7 +50,9 @@
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^10.0.1",
     "prettier": "^3.2.4",
-    "typescript": "^5.2.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
     "vite": "^6.2.2"
   },
   "workspaces": {

@@ -1,0 +1,5 @@
+api_version = "2025-01"
+name = "bogo-discount"
+type = "function"
+[build]
+command = "npm run build"

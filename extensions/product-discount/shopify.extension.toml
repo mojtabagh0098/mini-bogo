@@ -19,3 +19,5 @@ description = "t:description"
   [extensions.ui.paths]
   create = "/"
   details = "/"
+
+input = "discount-rules.json"

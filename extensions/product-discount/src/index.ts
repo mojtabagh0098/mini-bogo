@@ -1,37 +1,28 @@
 import {
-  runFunction,
   DiscountApplicationStrategy,
   FunctionRunResult,
-} from '@shopify/shopify-function';
-
-import {
-  ProductVariant,
+  Input,
   Cart,
-  Target,
   Discount,
-} from '@shopify/functions/dist/cart/product-discount/api';
+} from '../generated/api';
 
-runFunction(
-  async (input: Cart): Promise<FunctionRunResult> => {
-    const triggerProductId = 'gid://shopify/Product/1234567890';
-    const rewardProductId = 'gid://shopify/Product/9876543210';
+export function run(input: Input<Cart>): FunctionRunResult {
+  const TRIGGER_PRODUCT_ID = 'gid://shopify/Product/10099548488016';
+  const REWARD_PRODUCT_ID = 'gid://shopify/Product/10080151077200';
 
-    const triggerLine = input.cart.lines.find(line =>
-      line.merchandise.product.id === triggerProductId
-    );
+  const discounts: Discount[] = [];
 
-    const rewardLine = input.cart.lines.find(line =>
-      line.merchandise.product.id === rewardProductId
-    );
+  const triggerLine = input.cart.lines.find(
+    (line) => line.merchandise.product.id === TRIGGER_PRODUCT_ID
+  );
 
-    if (!triggerLine || !rewardLine) {
-      return {
-        discountApplicationStrategy: DiscountApplicationStrategy.First,
-        discounts: [],
-      };
-    }
+  const rewardLine = input.cart.lines.find(
+    (line) => line.merchandise.product.id === REWARD_PRODUCT_ID
+  );
 
-    const discount: Discount = {
+  if (triggerLine && rewardLine && triggerLine.quantity >= 1) {
+    discounts.push({
+      message: "BOGO applied!",
       targets: [
         {
           productVariant: {
@@ -41,15 +32,14 @@ runFunction(
       ],
       value: {
         percentage: {
-          value: 100.0,
+          value: 100,
         },
       },
-      message: 'BOGO: Free Product!',
-    };
+    });
+  }
 
-    return {
-      discountApplicationStrategy: DiscountApplicationStrategy.First,
-      discounts: [discount],
-    };
-  },
-);
+  return {
+    discountApplicationStrategy: DiscountApplicationStrategy.First,
+    discounts,
+  };
+}

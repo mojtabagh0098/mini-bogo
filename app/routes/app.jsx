@@ -1,4 +1,5 @@
 import { Link, Outlet, useLoaderData, useRouteError } from "@remix-run/react";
+import enTranslations from "@shopify/polaris/locales/en.json";
 import { boundary } from "@shopify/shopify-app-remix/server";
 import { AppProvider } from "@shopify/shopify-app-remix/react";
 import { NavMenu } from "@shopify/app-bridge-react";
@@ -17,7 +18,7 @@ export default function App() {
   const { apiKey } = useLoaderData();
 
   return (
-    <AppProvider isEmbeddedApp apiKey={apiKey}>
+    <AppProvider isEmbeddedApp apiKey={apiKey} i18n={enTranslations}>
       <NavMenu>
         <Link to="/app" rel="home">
           Home

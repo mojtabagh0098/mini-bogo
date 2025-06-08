@@ -1,3 +1,4 @@
+import { AppProvider } from "@shopify/polaris";
 import {
   Links,
   Meta,
@@ -21,7 +22,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <AppProvider i18n={enTranslations}>
+          <Outlet />
+        </AppProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

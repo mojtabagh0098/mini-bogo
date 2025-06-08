@@ -13,6 +13,7 @@ import { ActionFunctionArgs, json } from "@remix-run/node";
 import prisma from "../db.server";
 import { useLoaderData, useActionData } from "@remix-run/react";
 import { authenticate } from "../shopify.server";
+import { BogoRule } from "@prisma/client";
 
 // loader برای نمایش لیست Ruleها
 export async function loader({ request }: any) {
@@ -57,20 +58,22 @@ export default function BogoPage() {
 
   return (
     <Page title="BOGO Rules">
-      <Card sectioned>
-        <Form method="post">
+      <Card>
+        <Form method="post" onSubmit={() => {}}>
           <InlineGrid columns={2} gap="400">
             <TextField
               label="Trigger Product ID"
               name="triggerProductId"
               value={form.triggerProductId}
               onChange={handleChange("triggerProductId")}
+              autoComplete="off"
             />
             <TextField
               label="Reward Product ID"
               name="rewardProductId"
               value={form.rewardProductId}
               onChange={handleChange("rewardProductId")}
+              autoComplete="off"
             />
             <TextField
               label="Required Quantity"
@@ -78,6 +81,7 @@ export default function BogoPage() {
               type="number"
               value={form.requiredQty}
               onChange={handleChange("requiredQty")}
+              autoComplete="off"
             />
             <TextField
               label="Reward Quantity"
@@ -85,6 +89,7 @@ export default function BogoPage() {
               type="number"
               value={form.rewardQty}
               onChange={handleChange("rewardQty")}
+              autoComplete="off"
             />
             <Select
               label="Discount Type"
@@ -104,13 +109,17 @@ export default function BogoPage() {
         </Form>
       </Card>
 
-      {rules.map((rule) => (
-        <Card key={rule.id} title="BOGO Rule" sectioned>
-          Trigger: {rule.triggerProductId} → Reward: {rule.rewardProductId}  
-          <br />
-          Qty: {rule.requiredQty} → {rule.rewardQty}  
-          <br />
-          Type: {rule.discountType}
+      {rules.map((rule: BogoRule) => (
+        <Card key={rule.id}>
+          <Card>
+            <strong>BOGO Rule</strong>
+            <br />
+            Trigger: {rule.triggerProductId} → Reward: {rule.rewardProductId}  
+            <br />
+            Qty: {rule.requiredQty} → {rule.rewardQty}  
+            <br />
+            Type: {rule.discountType}
+          </Card>
         </Card>
       ))}
     </Page>

@@ -2,7 +2,7 @@
   "name": "mini-bogo",
   "private": true,
   "scripts": {
-    "build": "remix vite:build",
+    "build": "npx prisma generate && remix vite:build",
     "dev": "shopify app dev",
     "config:link": "shopify app config link",
     "generate": "shopify app generate",

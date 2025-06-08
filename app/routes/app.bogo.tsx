@@ -5,7 +5,7 @@ import {
   Button,
   Select,
   Form,
-  Grid,
+  Banner,
   InlineGrid,
 } from "@shopify/polaris";
 import { useState } from "react";
@@ -53,13 +53,16 @@ export default function BogoPage() {
     discountType: "free",
   });
 
+  const actionData = useActionData();
+
   const handleChange = (field: string) => (value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
   return (
     <Page title="BOGO Rules">
+      {actionData?.success && <Banner status="success">Rule added successfully</Banner>}
       <Card>
-        <Form method="post" onSubmit={() => {}}>
+        <Form method="post">
           <InlineGrid columns={2} gap="400">
             <TextField
               label="Trigger Product ID"
@@ -111,7 +114,6 @@ export default function BogoPage() {
 
       {rules.map((rule: BogoRule) => (
         <Card key={rule.id}>
-          <Card>
             <strong>BOGO Rule</strong>
             <br />
             Trigger: {rule.triggerProductId} → Reward: {rule.rewardProductId}  
@@ -119,7 +121,6 @@ export default function BogoPage() {
             Qty: {rule.requiredQty} → {rule.rewardQty}  
             <br />
             Type: {rule.discountType}
-          </Card>
         </Card>
       ))}
     </Page>

@@ -30,3 +30,14 @@ model Session {
   collaborator  Boolean?  @default(false)
   emailVerified Boolean?  @default(false)
 }
+
+model BogoRule {
+  id              String   @id @default(uuid())
+  shop            String
+  triggerProductId String
+  rewardProductId  String
+  requiredQty      Int
+  rewardQty        Int
+  discountType     String  // "free", "percent", "fixed"
+  createdAt        DateTime @default(now())
+}
